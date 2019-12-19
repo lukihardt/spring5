@@ -6,7 +6,7 @@
        http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<bean id="userDao" class="sopo.cn.spring5.dao.UserDaoImpl"></bean>
-	<bean id="user" class="sopo.cn.spring5.model.User">
+	<bean id="user" scope="prototype" class="sopo.cn.spring5.model.User">
 		<property name="username" value="admin"></property>
 		<property name="password" value="admin123"></property>
 	</bean>
@@ -51,6 +51,13 @@
 				<prop key="cdataTest"><![CDATA[zg!!F@ZmR,>_<>]]></prop>
 			</props>
 		</property>
+	</bean>
+	
+	<bean name="c3p0" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="root"></property>
+		<property name="password" value="jlq3j495ujlj"></property>
+		<property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/myemployees?serverTimezone=Asia/Shanghai"></property>
 	</bean>
 
 	<!-- 练习用途代码，没有实质作用 -->
