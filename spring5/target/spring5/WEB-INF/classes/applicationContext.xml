@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="userDao" class="sopo.cn.spring5.dao.UserDaoImpl"></bean>
+	<bean id="user" scope="prototype" class="sopo.cn.spring5.model.User">
+		<property name="username" value="admin"></property>
+		<property name="password" value="admin123"></property>
+	</bean>
+
+	<bean id="account" scope="prototype"
+		class="sopo.cn.spring5.model.Account">
+		<property name="name" value="I am Spring IOC 1" />
+		<property name="pwd" value="123" />
+		<!-- 注入map -->
+		<property name="books">
+			<map>
+				<entry key="10" value="CoreJava" />
+				<entry key="11" value="JavaWeb" />
+				<entry key="12" value="SSH2" />
+			</map>
+		</property>
+		<!-- 注入set -->
+		<property name="fridends">
+			<set>
+				<value>张龙</value>
+				<value>老郭</value>
+				<value>老李</value>
+			</set>
+		</property>
+		<!-- 注入list -->
+		<property name="cities">
+			<list>
+				<value>北</value>
+				<value>上</value>
+				<value>广</value>
+				<value>深</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean name="propertiesDemo"
+		class="sopo.cn.spring5.test.PropertiesDemo">
+		<property name="propertie">
+			<props>
+				<prop key="username">lyhjjek.{2}$</prop>
+				<prop key="pswd">218L.{8}$</prop>
+				<prop key="cdataTest"><![CDATA[zg!!F@ZmR,>_<>]]></prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean name="c3p0" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="root"></property>
+		<property name="password" value="jlq3j495ujlj"></property>
+		<property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/myemployees?serverTimezone=Asia/Shanghai"></property>
+	</bean>
+
+	<!-- 练习用途代码，没有实质作用 -->
+	<util:list id="set1">
+		<ref bean="userDao" />
+		<ref bean="user" />
+	</util:list>
+
+	<!-- 练习用途代码，没有实质作用 -->
+	<!-- <bean id="accountTtt" scope="prototype" class="sopo.cn.spring5.model.Account"> 
+		<property name="name"> <value><![CDATA[<as>><*&(I)]]></value> </property> 
+		</bean> -->
+</beans>

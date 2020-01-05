@@ -20,6 +20,10 @@ public class User {
 		this.username = username;
 	}
 
+//	public String testSpElMethod() {
+//		return "testSpElMethod";
+//	}
+	
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + "]";
