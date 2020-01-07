@@ -4,9 +4,11 @@
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util
        http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-5.2.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
        ">
 
 	<bean id="userDao" class="sopo.cn.spring5.dao.UserDaoImpl"></bean>
@@ -131,9 +133,8 @@
 	<bean id="car1" class="sopo.cn.spring5.util.CarFactoryBean">
 		<property name="name" value="ford"></property>
 	</bean>
-	
-	<context:component-scan base-package="sopo.cn.spring5.model"></context:component-scan>
-	<context:component-scan base-package="sopo.cn.spring5.dao"></context:component-scan>
+	<!-- ########################################### -->
+	<context:component-scan base-package="sopo.cn.spring5"></context:component-scan>
 	
 	<bean id="java" class="sopo.cn.spring5.model.Java">
 		<property name="score">
@@ -146,4 +147,16 @@
 			<value>77.5</value>
 		</property>
 	</bean>
+	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<aop:config>
+		<!-- 配置切面点表达式 -->
+		<aop:pointcut expression="execution( * sopo.cn.spring5.test.*.*(..))" id="poiontCut"/>
+		<!-- 配置切面和通知 -->
+		<aop:aspect ref="xmlLoggerAspect" order="1">
+			<aop:before method="beforeMethod" pointcut-ref="poiontCut"/>
+			<aop:before method="afterMethod" pointcut-ref="poiontCut"/>
+		</aop:aspect>
+	</aop:config>
 </beans>
